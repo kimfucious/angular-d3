@@ -1,0 +1,91 @@
+<form
+  class="card w-100 p-3"
+  [formGroup]="itemForm"
+  novalidate
+  (ngSubmit)="onSubmit(itemForm.value)"
+>
+  <div class="card-body">
+    <div class="form-group">
+      <label for="name">Threat Name</label>
+      <input class="form-control" formControlName="name" id="name" />
+      <ng-container *ngFor="let validation of validationMessages.name">
+        <small
+          id="nameHelp"
+          class="form-text text-danger"
+          *ngIf="
+            itemForm.get('name').hasError(validation.type) &&
+            (itemForm.get('name').dirty || itemForm.get('name').touched)
+          "
+          >{{ validation.message }}
+        </small>
+      </ng-container>
+    </div>
+    <div class="form-group">
+      <label for="code">CWE Code</label>
+
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="code-addon">CWE-</span>
+        </div>
+        <input
+          class="form-control"
+          formControlName="code"
+          id="code"
+          type="number"
+        />
+        <ng-container *ngFor="let validation of validationMessages.code">
+          <small
+            id="codeHelp"
+            class="form-text text-danger"
+            *ngIf="
+              itemForm.get('code').hasError(validation.type) &&
+              (itemForm.get('code').dirty || itemForm.get('code').touched)
+            "
+            >{{ validation.message }}
+          </small>
+        </ng-container>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="amount"># of Incidents</label>
+      <div class="input-group">
+        <input
+          class="form-control"
+          formControlName="value"
+          id="value"
+          type="number"
+        />
+      </div>
+      <ng-container *ngFor="let validation of validationMessages.value">
+        <small
+          id="valueHelp"
+          class="form-text text-danger"
+          *ngIf="
+            itemForm.get('value').hasError(validation.type) &&
+            (itemForm.get('value').dirty || itemForm.get('value').touched)
+          "
+          >{{ validation.message }}
+        </small>
+      </ng-container>
+    </div>
+    <div class="d-flex justify-content-between">
+      <button
+        class="btn btn-outline-danger d-flex align-items-center"
+        type="submit"
+        [disabled]="!itemForm.valid"
+      >
+        <i class="material-icons">add</i>
+        Add Threat
+      </button>
+      <button
+        *ngIf="!isLoading && !threats?.length"
+        (click)="handleSeedThreats()"
+        class="btn btn-outline-success d-flex align-items-center ml-2"
+        type="button"
+      >
+        <i class="material-icons">local_florist</i>
+        Seed Threats
+      </button>
+    </div>
+  </div>
+</form>

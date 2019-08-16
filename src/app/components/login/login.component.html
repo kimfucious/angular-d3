@@ -1,0 +1,46 @@
+<app-title></app-title>
+<div class="d-flex flex-column align-items-center justify-content-center w-100">
+  <div
+    class="d-flex card flex-column align-items-center mb-3"
+    style="max-width: 300px; background-color: #fafafa; border-radius: 8px"
+  >
+    <div class="card-body">
+      <h1
+        class="header display-4 mb-4 mt-0 text-center"
+        style="font-size: 36px"
+      >
+        Sign In
+      </h1>
+      <form [formGroup]="loginForm" style="min-width: 250px">
+        <div class="form-group">
+          <label>Email address</label>
+          <input
+            autocomplete="username"
+            autofocus
+            type="email"
+            formControlName="email"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group mb-0">
+          <label>Password</label>
+          <input
+            autocomplete="current-password"
+            type="password"
+            class="form-control"
+            formControlName="password"
+          />
+        </div>
+        <button
+          type="submit"
+          (click)="handleLogin(loginForm.value)"
+          class="btn btn-outline-danger btn-block my-3"
+        >
+          <span *ngIf="!showSpinner">Login</span>
+          <app-grow-spinner *ngIf="showSpinner"></app-grow-spinner>
+        </button>
+      </form>
+    </div>
+  </div>
+  <flash-messages></flash-messages>
+</div>

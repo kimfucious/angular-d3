@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-light mb-4">
+  <div class="container">
+    <a
+      class="navbar-brand"
+      [routerLink]="['']"
+      routerLinkActive="router-link-active"
+      >Angular D3</a
+    >
+    <button
+      (click)="isCollapsed = !isCollapsed"
+      class="d-block d-sm-none navbar-toggler ml-auto"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarMain"
+      aria-controls="navbarMain"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      [ngbCollapse]="isCollapsed"
+      class="collapse navbar-collapse"
+      id="navbarMain"
+    >
+      <ul class="navbar-nav mr-auto">
+        <!-- <li
+          *ngIf="isLoggedIn"
+          class="nav-item"
+          [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a [routerLink]="['']" class="nav-link">Home</a>
+        </li> -->
+        <li
+          *ngIf="isLoggedIn"
+          class="nav-item"
+          [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a class="nav-link" [routerLink]="['threat-doughnut']"
+            >Threat Doughnut</a
+          >
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li
+          *ngIf="isLoggedIn"
+          class="nav-item d-flex align-items-center text-muted mr-3"
+        >
+          <i class="material-icons mr-1">account_circle</i>{{ loggedInUser }}
+        </li>
+        <li *ngIf="isLoggedIn" class="nav-item">
+          <a
+            href="#"
+            class="btn btn-outline-danger btn-sm"
+            (click)="handleLogout()"
+            >Logout</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
