@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from "@angular/core";
 import * as d3 from "d3";
 import { FirebaseService } from "../../services/firebase.service";
 import { legendColor } from "d3-svg-legend";
@@ -10,6 +10,7 @@ import "rxjs/add/operator/takeUntil";
 
 @Component({
   selector: "app-graph",
+  encapsulation: ViewEncapsulation.None,
   templateUrl: "./graph.component.html",
   styleUrls: ["./graph.component.css"]
 })
@@ -142,8 +143,8 @@ export class GraphComponent implements OnInit, OnDestroy {
     // update existing paths
     this.paths
       .attr("d", this.arcPath)
+      .attr("ngbTooltip", "Tip Me!")
       .attr("placement", "top")
-      .attr("triggers", "mouseenter:mouseleave")
       .transition(this.t)
       .attrTween("d", this.arcTweenUpdate);
 
@@ -155,8 +156,8 @@ export class GraphComponent implements OnInit, OnDestroy {
       .attr("stroke", "#fff")
       .attr("stroke-width", 3)
       .attr("fill", (d: any) => this.color(d.data.name))
+      .attr("ngbTooltip", "Tip Me!")
       .attr("placement", "top")
-      .attr("triggers", "mouseenter:mouseleave")
       .each(function(d: object, i: number, n: object) {
         this._current = d;
       })

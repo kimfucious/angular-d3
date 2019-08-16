@@ -10,3 +10,4 @@ It is a demonstration of using:
   - [Firestore](https://firebase.google.com/products/firestore/)
   - [Firebase authentication](https://firebase.google.com/products/auth/)
 - [ng-bootstrap](https://ng-bootstrap.github.io)
+- [Travis CI](https://travis-ci.org/)
