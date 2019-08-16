@@ -10,7 +10,7 @@ before_script:
 script:
   - ng build --prod
 after_success:
-  - firebase deploy --token yRVEgOIJulgG7WzudsXn481zBFO5fqWjW/jhBfZ1i55Zk4rSYoUaxgna0WTcK9ZRmR7otWwQuoNivM+xds+ajHThlIzB+FGr9mc6DzgQ0lV9OnV0JsDMBNXUTGqO0u4zBSte0LCKJnBCoyhTXLq/J7cIrTNxhRutD1FynRUU7rk1+C1vEZ54GmewFqej81XPzjTVER95bSMje29ziIrmFyh5+JLf3KRohG6v329OSyZK5vYAoARiP55enF5gNiJ05Ud1DycWGmkIMRI2l++lENvvStWyYG/Pxv1wCAAlsAiFZXGXsRmBgT7FNFG+gKjdcnhy0lgMPg2+J2zS/uhWQjT01SQsPxXTcVvni8x7Hz4EdoOjhWAtopuCD8zFl+lCbkJGcm5Kr54cYmq8VnAJTruJW/DcOMF5zg02GAoOdmL2+CxaSuxNxFUWtDmKT4FuTolR7Xdgf4ca1RU0pXiG3hu3OwoUTv8bdXgLTYP1ue+imp83mtLPRntYHzjCxG6IqKWr/eCBsaS5a+F5W1j0mN6TuEsBJ6MNIaxofiO88a/Xz13H8eheoz1bJB7EYdRp+t3r1+b+hsADQrraFHEgCElUrbGW5wcSsrauDX/nzY78dab49u3oAP2ZNxkrTvzioiRWH9Jh2P/Fpw9pcRvBOkosFzXW7DXaQdpo6i9KAsc=
+  - firebase deploy --token "$FIREBASE_TOKEN"
 notifications:
   email:
     on_failure: change
