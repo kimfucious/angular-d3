@@ -1,4 +1,4 @@
-# Angular-D3
+# Angular-D3 ![Travis Badge](https://travis-ci.org/kimfucious/angular-d3.svg?branch=master)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
 
