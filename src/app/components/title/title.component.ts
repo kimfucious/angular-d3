@@ -19,7 +19,7 @@ export class TitleComponent implements OnInit {
         width: isSmall ? "72px" : "128px"
       };
       this.doughnutStyles = {
-        "font-size": isSmall ? "72px" : "120px"
+        "font-size": isSmall ? "56px" : "120px"
       };
       this.operatorStyles = {
         "font-size": isSmall ? "28px" : "56px"
