@@ -25,6 +25,7 @@ import { ThreatContainerComponent } from "./components/threat-container/threat-c
 import { TitleComponent } from "./components/title/title.component";
 import { TooltipComponent } from "./components/shared/tooltip/tooltip.component";
 import { OctocatComponent } from './components/octocat/octocat.component';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import { OctocatComponent } from './components/octocat/octocat.component';
     TitleComponent,
     NotFoundComponent,
     GrowSpinnerComponent,
-    OctocatComponent
+    OctocatComponent,
   ],
   imports: [
     AngularFireAuthModule,
@@ -53,7 +54,7 @@ import { OctocatComponent } from './components/octocat/octocat.component';
     NgbModule,
     ReactiveFormsModule
   ],
-  providers: [AuthService, AuthGuard, FirebaseService],
+  providers: [AuthService, AuthGuard, FirebaseService, BreakpointObserver ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
