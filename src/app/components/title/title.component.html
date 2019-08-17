@@ -1,12 +1,11 @@
 <div class="d-flex justify-content-center align-items-center">
   <img
     src="../assets/angular.svg"
-    height="128px"
-    width="128px"
+    [ngStyle]="titleImageStyles"
     alt="angular logo"
   />
-  <span class="text-muted" style="font-size: 56px">&#43;</span>
-  <img src="../assets/d3.svg" height="128px" width="128px" alt="angular logo" />
-  <span class="text-muted" style="font-size: 56px">&#61;</span>
-  <span class="pb-3" style="font-size: 120px">🍩</span>
+  <span class="text-muted" [ngStyle]="operatorStyles">&#43;</span>
+  <img src="../assets/d3.svg" alt="angular logo" [ngStyle]="titleImageStyles" />
+  <span class="text-muted" [ngStyle]="operatorStyles">&#61;</span>
+  <span class="pb-3" [ngStyle]="doughnutStyles">🍩</span>
 </div>
