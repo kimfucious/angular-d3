@@ -3,6 +3,8 @@ import { AuthService } from "src/app/services/auth.service";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 import "rxjs/add/operator/takeUntil";
+import { BreakpointsService } from "src/app/services/breakpoints.service";
+import { Breakpoints } from "@angular/cdk/layout";
 
 @Component({
   selector: "app-navbar",
@@ -14,10 +16,22 @@ export class NavbarComponent implements OnInit {
   isLoggedIn: boolean;
   loggedInUser: string;
   ngUnsubscribe: Subject<void> = new Subject();
+  isXSmallScreen: boolean;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private breakpointsService: BreakpointsService
+  ) {}
 
   ngOnInit() {
+    this.breakpointsService.breakpoints.subscribe(res => {
+      if (res.breakpoints[Breakpoints.XSmall]) {
+        this.isXSmallScreen = true;
+      } else {
+        this.isXSmallScreen = false;
+      }
+    });
     this.authService
       .getAuth()
       .takeUntil(this.ngUnsubscribe)

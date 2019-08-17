@@ -24,14 +24,6 @@
       id="navbarMain"
     >
       <ul class="navbar-nav mr-auto">
-        <!-- <li
-          *ngIf="isLoggedIn"
-          class="nav-item"
-          [routerLinkActive]="['active']"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
-          <a [routerLink]="['']" class="nav-link">Home</a>
-        </li> -->
         <li
           *ngIf="isLoggedIn"
           class="nav-item"
@@ -45,7 +37,7 @@
       </ul>
       <ul class="navbar-nav ml-auto">
         <li
-          *ngIf="isLoggedIn"
+          *ngIf="isLoggedIn && !isXSmallScreen"
           class="nav-item d-flex align-items-center text-muted mr-3"
         >
           <i class="material-icons mr-1">account_circle</i>{{ loggedInUser }}
@@ -53,7 +45,7 @@
         <li *ngIf="isLoggedIn" class="nav-item">
           <a
             href="#"
-            class="btn btn-outline-danger btn-sm"
+            class="btn btn-outline-danger btn-sm mt-2 mt-sm-0"
             (click)="handleLogout()"
             >Logout</a
           >
