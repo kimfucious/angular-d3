@@ -50,6 +50,22 @@ export class GraphComponent implements OnInit, OnDestroy {
       .value((d: any) => d.value);
 
     this.createSvg();
+
+    this.tooltip = tip()
+      .attr("class", "tooltip card")
+      .html((d: any) => {
+        let content = `<div class="name"><strong>Threat: </strong> ${
+          d.data.name
+        }</div>`;
+        content += `<div class="code"><strong>Code: </strong> ${d.data.code.toUpperCase()}</div>`;
+        content += `<div class="value"><strong>Incidents: </strong> ${
+          d.data.value
+        }</div>`;
+        content += `<div class="delete">Click slice to delete</div>`;
+        return content;
+      });
+    this.graph.call(this.tooltip);
+
     this.firebaseService
       .getThreats()
       .takeUntil(this.ngUnsubscribe)
@@ -135,21 +151,6 @@ export class GraphComponent implements OnInit, OnDestroy {
     this.color.domain(data.map((d: any) => d.name));
     this.legendGroup.call(this.legend);
     this.paths = this.graph.selectAll("path").data(this.pie(data));
-
-    this.tooltip = tip()
-      .attr("class", "tooltip card")
-      .html((d: any) => {
-        let content = `<div class="name"><strong>Threat: </strong> ${
-          d.data.name
-        }</div>`;
-        content += `<div class="code"><strong>Code: </strong> ${d.data.code.toUpperCase()}</div>`;
-        content += `<div class="value"><strong>Incidents: </strong> ${
-          d.data.value
-        }</div>`;
-        content += `<div class="delete">Click slice to delete</div>`;
-        return content;
-      });
-    this.graph.call(this.tooltip);
 
     this.paths
       .exit()
