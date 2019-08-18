@@ -17,6 +17,7 @@ It is a demonstration of using:
 ## Things I haven't figured out yet
 
 - How can you dynamically add/update paths, using a D3 `attr` method that allows a `ng-bootstrap` tool tip or popover to display?
+  - I kind of gave up on this and went with [d3-tip](https://www.npmjs.com/package/d3-tip) instead.
 - How to position D3 elements using Flexbox.
 - How to make D3 graphs responsive
 
