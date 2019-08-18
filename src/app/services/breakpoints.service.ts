@@ -17,12 +17,5 @@ export class BreakpointsService {
       Breakpoints.XSmall,
       Breakpoints.Small
     ]);
-    // this.breakpointObserver.observe([Breakpoints.XSmall]).subscribe(res => {
-    //   if (res.matches) {
-    //     this.isSmallScreen = true;
-    //   } else {
-    //     this.isSmallScreen = false;
-    //   }
-    // });
   }
 }
