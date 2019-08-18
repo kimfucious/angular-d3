@@ -15,7 +15,7 @@ import "rxjs/add/operator/takeUntil";
   templateUrl: "./form.component.html",
   styleUrls: ["./form.component.css"]
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit, OnDestroy {
   itemForm: FormGroup;
   threats: ThreatId[];
   threatSeed: Threat[];
@@ -71,7 +71,7 @@ export class FormComponent implements OnInit {
       });
   }
 
-  OnDestroy() {
+  ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }

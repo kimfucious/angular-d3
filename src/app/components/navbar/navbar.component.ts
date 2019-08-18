@@ -31,13 +31,15 @@ export class NavbarComponent implements OnInit {
     this.location.onUrlChange(res => {
       this.path = res;
     });
-    this.breakpointsService.breakpoints.subscribe(res => {
-      if (res.breakpoints[Breakpoints.XSmall]) {
-        this.isXSmallScreen = true;
-      } else {
-        this.isXSmallScreen = false;
-      }
-    });
+    this.breakpointsService.breakpoints
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(res => {
+        if (res.breakpoints[Breakpoints.XSmall]) {
+          this.isXSmallScreen = true;
+        } else {
+          this.isXSmallScreen = false;
+        }
+      });
     this.authService
       .getAuth()
       .takeUntil(this.ngUnsubscribe)
