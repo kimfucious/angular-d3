@@ -92,6 +92,7 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit(formData) {
+    formData.code = "CWE-" + formData.code;
     this.firebaseService.addThreat(formData).then(res => {
       this.resetFields();
     });
