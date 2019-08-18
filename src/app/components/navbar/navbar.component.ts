@@ -5,6 +5,7 @@ import { Subject } from "rxjs";
 import "rxjs/add/operator/takeUntil";
 import { BreakpointsService } from "src/app/services/breakpoints.service";
 import { Breakpoints } from "@angular/cdk/layout";
+import { Location } from "@angular/common";
 
 @Component({
   selector: "app-navbar",
@@ -12,19 +13,24 @@ import { Breakpoints } from "@angular/cdk/layout";
   styleUrls: ["./navbar.component.css"]
 })
 export class NavbarComponent implements OnInit {
-  isCollapsed = false;
+  isCollapsed = true;
   isLoggedIn: boolean;
+  isXSmallScreen: boolean;
   loggedInUser: string;
   ngUnsubscribe: Subject<void> = new Subject();
-  isXSmallScreen: boolean;
+  path: string;
 
   constructor(
     private authService: AuthService,
-    private router: Router,
-    private breakpointsService: BreakpointsService
+    private breakpointsService: BreakpointsService,
+    private location: Location,
+    private router: Router
   ) {}
 
   ngOnInit() {
+    this.location.onUrlChange(res => {
+      this.path = res;
+    });
     this.breakpointsService.breakpoints.subscribe(res => {
       if (res.breakpoints[Breakpoints.XSmall]) {
         this.isXSmallScreen = true;
@@ -50,5 +56,6 @@ export class NavbarComponent implements OnInit {
     this.ngUnsubscribe.complete();
     this.authService.logout();
     this.router.navigate(["/login"]);
+    this.isCollapsed = true;
   }
 }

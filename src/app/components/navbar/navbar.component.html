@@ -7,6 +7,7 @@
       >Angular D3</a
     >
     <button
+      *ngIf="path != '/login'"
       (click)="isCollapsed = !isCollapsed"
       class="d-block d-sm-none navbar-toggler ml-auto"
       type="button"
