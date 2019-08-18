@@ -7,7 +7,7 @@ import {
 } from "@angular/forms";
 import { FirebaseService } from "../../services/firebase.service";
 import { Threat, ThreatId } from "../../models/ThreatDoughnut";
-import { Subject } from "rxjs";
+import { Subscription } from "rxjs";
 import "rxjs/add/operator/takeUntil";
 
 @Component({
@@ -20,7 +20,7 @@ export class FormComponent implements OnInit, OnDestroy {
   threats: ThreatId[];
   threatSeed: Threat[];
   isLoading: boolean;
-  ngUnsubscribe: Subject<void> = new Subject();
+  subscription: Subscription;
   validationMessages = {
     name: [{ type: "required", message: "Name is required." }],
     code: [{ type: "maxlength", message: "Max code length: 4 digits" }],
@@ -62,18 +62,14 @@ export class FormComponent implements OnInit, OnDestroy {
       }
     ];
     this.createForm();
-    this.firebaseService
-      .getThreats()
-      .takeUntil(this.ngUnsubscribe)
-      .subscribe(threats => {
-        this.threats = threats;
-        this.isLoading = false;
-      });
+    this.subscription = this.firebaseService.getThreats().subscribe(threats => {
+      this.threats = threats;
+      this.isLoading = false;
+    });
   }
 
   ngOnDestroy() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+    this.subscription.unsubscribe();
   }
   createForm() {
     this.itemForm = this.fb.group({

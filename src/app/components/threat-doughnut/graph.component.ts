@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import tip from "d3-tip";
 import { FirebaseService } from "../../services/firebase.service";
 import { legendColor } from "d3-svg-legend";
-import { Subject } from "rxjs";
+import { Subject, Subscription } from "rxjs";
 import { Center } from "../../models/ThreatDoughnut";
 import { Dims } from "src/app/models/ThreatDoughnut";
 import { ThreatId } from "../../models/ThreatDoughnut";
@@ -11,8 +11,8 @@ import "rxjs/add/operator/takeUntil";
 
 @Component({
   selector: "app-graph",
-  encapsulation: ViewEncapsulation.None,
   templateUrl: "./graph.component.html",
+  encapsulation: ViewEncapsulation.None,
   styleUrls: ["./graph.component.css"]
 })
 export class GraphComponent implements OnInit, OnDestroy {
@@ -31,7 +31,7 @@ export class GraphComponent implements OnInit, OnDestroy {
   t: any;
   threats: ThreatId[];
   tooltip: any;
-  ngUnsubscribe: Subject<void> = new Subject();
+  subscription: Subscription;
   constructor(private firebaseService: FirebaseService) {}
 
   ngOnInit() {
@@ -66,9 +66,8 @@ export class GraphComponent implements OnInit, OnDestroy {
       });
     this.graph.call(this.tooltip);
 
-    this.firebaseService
+    this.subscription = this.firebaseService
       .getThreats()
-      .takeUntil(this.ngUnsubscribe)
       .subscribe((threats: ThreatId[]) => {
         this.update(threats);
         this.threats = threats;
@@ -77,8 +76,7 @@ export class GraphComponent implements OnInit, OnDestroy {
     this.t = d3.transition().duration(2000);
   }
   ngOnDestroy() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+    this.subscription.unsubscribe();
   }
 
   // Tweens
